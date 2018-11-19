@@ -1,0 +1,31 @@
+{% extends "bootstrap/base.html" %}
+{%import "bootstrap/wtf.html" as wtf%}
+<!--- importa wtf al template--->
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}"> <!--- asigna el diseño
+                                                                              del css -->
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+      <form class="form-signin" method="POST" action="/login"> <!--- usamos los métodos flask--->
+        <h2 class="form-signin-heading">Ingrese Usuario</h2>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username)}}
+        {{ wtf.form_field(form.password)}}
+        {{ wtf.form_field(form.remember)}} <!-- se eliminan las etiquetas
+                                           del template original por el macro que
+                                           importa wtforms--->
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+{% endblock %}
